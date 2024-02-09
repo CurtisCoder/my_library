@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+
+	<title>My Library</title>
+  </head>
+
+  <body>
+
+			<button onclick="getDirty()">Add new book</button>
+			<hr>
+
+			<button onclick="getBooks()">Book Listing</button>
+			<br>
+			<hr>
+			<button onclick="deleteBooks()">Delete Listing</button>
+			<br>
+			<hr>
+			<button onclick="statusBooks()">Change read status</button>
+			<br>
+			<hr>
+			<div id="dis"></div>
+
+			
+<script>
+
+	function Book(title, author, pages, status, isbn) {
+ 		this.title = title;
+ 		this.author = author;
+ 		this.pages = pages;
+		this.status = status;
+		this.isbn = isbn;
+		}
+
+	const myLibrary = [];
+	let numba = 100;
+	
+	function getDirty() {		
+
+		let title = prompt("Enter book title");
+		let author = prompt("Enter book author");
+		let pages = prompt("Enter number of pages of the book");
+		let status = prompt("Indicate whether it has been 'read' or 'not read'");
+		let isbn = numba;
+		numba++;
+
+		let newBook = addBookToLibrary(title, author, pages, status, isbn);	
+		myLibrary.push(newBook);
+		console.log(myLibrary);
+		console.table(myLibrary);
+		
+		}
+
+	function addBookToLibrary(title, author, pages, status, isbn) {
+		return new Book(title, author, pages, status, isbn);
+		}
+	
+	
+	function getBooks() {
+		for (var i = 0; i < myLibrary.length; i++) {
+			
+			let booky = myLibrary[i];
+			const para = document.createElement("p");
+			para.textContent = booky.title + ", " + booky.author + ", " + booky.pages + ", " + booky.status + ", " + booky.isbn;
+			document.querySelector('#dis').appendChild(para);
+		}
+			
+		}
+
+// function createBtn1() {
+// 	const deleteBtn = document.createElement('button');
+// 	deleteBtn.textContent = 'Delete Book';
+// 	document.body.appendChild(deleteBtn);
+// 	//deleteBtn.setAttribute('id','btn'+y);
+// 	deleteBtn.addEventListener('click', deleteBook)
+// }
+
+function deleteBooks() {
+			let row = prompt("enter isbn of book you want to delete");
+			let row_indx = row - 100;
+			delete myLibrary[row_indx];
+			console.table(myLibrary);
+
+			clrScreen();
+			getBooks();
+		}
+
+function clrScreen() {
+		const element = document.querySelector('#dis');
+		while (element.firstChild) {
+			element.removeChild(element.firstChild);
+		}
+
+	}
+
+function statusBooks() {
+	let rowz = prompt("enter isbn of book you want to change read status");
+			let rowz_indx = rowz - 100;
+	x = myLibrary[rowz_indx, status];
+		if (x = 'read') {
+			myLibrary[rowz_indx].status = 'unread';
+			clrScreen();
+			getBooks();
+		} else {
+			myLibrary[rowz_indx].status = 'read';
+			clrScreen();
+			getBooks();
+	}
+		console.table(myLibrary);
+}
+
+
+
+</script>			
+		
+
+
+
+
+  </body>
+</html>
+
+
+
+
+
+
+
